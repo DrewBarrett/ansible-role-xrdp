@@ -11,9 +11,7 @@
   yum:
     name:
       - xrdp
-      - tigervnc-server
     state: present
-    enablerepo: cr
   
 - name: start and enable xrdp service
   become: true
@@ -30,12 +28,13 @@
     state: enabled
   notify: restart firewalld
 
-- name: Configure SE Linux for XRDP
-  become: true
-  sefcontext:
-    target: "{{ item }}"
-    setype: bin_t
-    state: present
-  with_items:
-    - '/usr/sbin/xrdp'
-    - '/usr/sbin/xrdp-sesman'
+# This shouldn't be needed with xrdp-selinux
+#- name: Configure SE Linux for XRDP
+#  become: true
+#  sefcontext:
+#    target: "{{ item }}"
+#    setype: bin_t
+#    state: present
+#  with_items:
+#    - '/usr/sbin/xrdp'
+#    - '/usr/sbin/xrdp-sesman'
