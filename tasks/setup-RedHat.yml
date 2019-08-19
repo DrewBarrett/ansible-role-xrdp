@@ -27,6 +27,7 @@
     permanent: true
     state: enabled
   notify: restart firewalld
+  when: manage_firewall
 
 # This shouldn't be needed with xrdp-selinux
 #- name: Configure SE Linux for XRDP
